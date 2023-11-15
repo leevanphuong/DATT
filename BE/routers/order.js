@@ -4,5 +4,6 @@ const router = express.Router()
 router.post('/add', orderController.addOrders)
 router.put('/edit/:id', orderController.updateOrders)
 router.get('/', orderController.getAllOrders)
+router.get('/:id', orderController.getOneOrders)
 router.delete('/:id', orderController.deleteOrders)
 export default router

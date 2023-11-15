@@ -1,6 +1,6 @@
 import { Button, Space, Table, Image, Modal, Form, Input, Upload, message } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getAllCategory, createCategory } from './service/categoeyservice';
+import { getAllCategory, createCategory, deleteCategory } from './service/categoeyservice';
 import { UploadOutlined } from '@ant-design/icons';
 
 const CategoryAdmin = () => {
@@ -37,7 +37,7 @@ const CategoryAdmin = () => {
       const categories = response.data;
 
       const transformedData = categories.map((category:any) => ({
-        key: category.id,
+        key: category._id,
         name: category.name,
         images: category.images,
       }));
@@ -51,7 +51,16 @@ const CategoryAdmin = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
-
+  const removeCategory=(id:any)=>{
+    const remove = confirm("Bạn có muốn xóa")
+    if(remove){
+      deleteCategory(id)
+        message.success("Xóa thành công")
+    }
+    else{
+        message.error("Xóa thất bại")
+    }
+  }
   const columns = [
     {
       title: 'Name',
@@ -71,7 +80,7 @@ const CategoryAdmin = () => {
       render: (_:any, record:any) => (
         <Space size="middle">
           <Button className='btn btn-warning'>Edit</Button>
-          <Button className='btn btn-danger'>Xóa</Button>
+          <Button onClick={()=>{removeCategory(record.key)}} className='btn btn-danger'>Xóa</Button>
         </Space>
       ),
     },

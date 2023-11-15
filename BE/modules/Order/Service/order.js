@@ -24,4 +24,7 @@ export const updateOrder = async (req) => {
     )
     return updateOrders
 }
-
+export const getOneOrder = async (req) => {
+    const Orders = await Order.findById(req.params.id)
+    return Orders
+}

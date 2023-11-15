@@ -15,14 +15,8 @@ const productSchema = new mongoose.Schema(
             type: Array,
             default: [],
         },
-        AuthorId: {
-            type: mongoose.Types.ObjectId,
-            ref: 'Author',
-        },
-        categoryId: {
-            type: mongoose.Types.ObjectId,
-            ref: 'Category',
-        },
+        AuthorId: String,
+        categoryId:String,
     },
     {
         timestamps: true,

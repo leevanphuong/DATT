@@ -8,3 +8,6 @@ export const getAllOrder =()=>{
 export const removeOrder =(id:any)=>{
     return instance.delete(`/cart/${id}`)
 }
+export const getOneOrder =(id:any)=>{
+    return instance.get(`/order/${id}`)
+}

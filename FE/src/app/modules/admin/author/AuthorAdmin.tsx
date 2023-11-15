@@ -104,7 +104,7 @@ const AuthorAdmin = () => {
 
   return (
     <div>
-      <h3 className='text-primary'>Danh mục</h3>
+      <h3 className='text-primary'>Tác Giả</h3>
       <div className=''>
         <Button type='primary' onClick={showModal}>
           Thêm

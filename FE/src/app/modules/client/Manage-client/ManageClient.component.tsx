@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { getAllOrder } from '~/app/api/order/ApiOrder';
+import { getAllOrder, getOneOrder } from '~/app/api/order/ApiOrder';
 import { useProductRedux } from '../redux/hook/useProductReducer';
+import { deleteOrder } from '../../admin/order/service/orderService';
+import { message } from 'antd';
 
 interface ManageClientProps {}
 
@@ -36,7 +38,22 @@ const ManageClient:FunctionComponent<ManageClientProps> = () => {
           
           const { data: { products: productArray } } = useProductRedux();
           const matchingIds = productArray.filter((product: any) => getProduct.some(productId => productId === product._id));
-
+          const removeOrder = async (id: any) => {
+            try {
+              const orderResponse = await getOneOrder(id);
+              const order = orderResponse.data;
+              if (order.status === 'Đang chờ duyệt') {
+                await deleteOrder(id);
+                message.success('Xóa thành công');
+              } else {
+                message.error('Không thể xóa đơn hàng đã được duyệt hoặc đã xử lý.');
+              }
+            } catch (error) {
+              console.error('Error removing order:', error);
+              message.error('Đã có lỗi xảy ra khi xóa đơn hàng.');
+            }
+          };
+          
   return (
     <div className='container mt-5'>
         <div className='row'>
@@ -96,14 +113,21 @@ const ManageClient:FunctionComponent<ManageClientProps> = () => {
                           <tr key={item?._id}>
                           <td>{index++}</td>
                           <td>{item?.status}</td>
+                          <td>
                           {
                            matchingIds.map((item:any)=>(
-                            <td>{item?.name}</td>
+                            <p>{item?.name}</p>
                            ))
                           }
-                          <td>{item?.totalPrice}</td>
+                          </td>
                           <td>
-                              <button className='btn btn-danger'>Hủy đơn hàng </button>
+                            {new Intl.NumberFormat('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND',
+                            }).format(item?.totalPrice)}
+                        </td>
+                          <td>
+                              <button className='btn btn-danger' onClick={()=>removeOrder(item?._id)}>Hủy đơn hàng </button>
                           </td>
                           </tr>
                       ))}

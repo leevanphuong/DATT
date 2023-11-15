@@ -31,7 +31,7 @@ const checkAdminAuthorization = (req, res, next) => {
 }
 const checkUserStoreAuthorization = (req, res, next) => {
     veryfiletoken(req, res, () => {
-        if (req.user.role == "USER_STORE") {
+        if (req.user.role == "USER") {
             next()
         } else {
             return res.status(status.UNAUTHORIZED).json('Thất Bại')
@@ -40,7 +40,7 @@ const checkUserStoreAuthorization = (req, res, next) => {
 }
 const checkUserStoreAndAdminAuthorization = (req, res, next) => {
     veryfiletoken(req, res, () => {
-        if (req.user.role == "USER_STORE" || req.user.role == "ADMIN") {
+        if (req.user.role == "USER" || req.user.role == "ADMIN") {
             next()
         } else {
             return res.status(status.UNAUTHORIZED).json('Thất Bại')
