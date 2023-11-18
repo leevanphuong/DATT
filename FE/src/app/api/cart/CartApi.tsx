@@ -1,11 +1,10 @@
-import { Icart } from "~/app/interface/Cart"
-import instance from "../instance/api"
+import { axiosPrivate } from "../ConfigApi"
 export const addCart =(cart: any)=>{
-    return instance.post('/cart/add', cart)
+    return axiosPrivate.post('/cart/add', cart)
 }
 export const getAllCart =()=>{
-    return instance.get('/cart/')
+    return axiosPrivate.get('/cart/')
 }
 export const removeCart =(id:any)=>{
-    return instance.delete(`/cart/${id}`)
+    return axiosPrivate.delete(`/cart/${id}`)
 }

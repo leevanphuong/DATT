@@ -12,25 +12,17 @@ export const deleteCategory = async (req) => {
     const remove = await Category.findByIdAndDelete(req.params.id)
     return remove
 }
-export const addCategory = async (req) => {
-    const fileImages = req.files
-    const check = fileImages.flatMap((item) => item.path)
-    const categorys = await Category.create({
-        ...req.body,
-        images: check
-    })
+export const addCategory= async (req) => {
+    const categorys = await Category.create(req.body)
     return categorys
 }
-export const updateCategory = async (req) => {
+export const updateCategory= async (req) => {
     const id = req.params.id
-    const fileImages = req.files
-    const check = fileImages.flatMap((item) => item.path)
-    const update = await Category.updateOne({
+    const update= await Category.updateOne({
         _id: id
     },
         {
-            ...req.body,
-            images: check
+            ...req.body
         }
     )
     return update

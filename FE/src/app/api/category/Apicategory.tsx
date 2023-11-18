@@ -1,14 +1,15 @@
 import instance from "../instance/api"
 import { Icate } from "~/app/interface/Category"
+import { axiosPrivate } from "../ConfigApi"
 export const getAllCate =()=>{
-    return instance.get('/category/')
+    return axiosPrivate.get('/category/')
 }
 export const getOneCate=(id: any)=>{
-    return instance.get('/category/'+id)
+    return axiosPrivate.get('/category/'+id)
 }
 export const removeCate =(id: number|string)=>{
     const {accessToken}= JSON.parse(localStorage.getItem('user')!) // neu co accessToken thì cho thực hiện quyền 
-    return instance.delete('/category/'+id,{
+    return axiosPrivate.delete('/category/'+id,{
         headers:{
             Authorization: `Bearer ${accessToken}` 
         },
@@ -17,7 +18,7 @@ export const removeCate =(id: number|string)=>{
 }
 export const updateCate =(category: Icate)=>{
     const {accessToken}= JSON.parse(localStorage.getItem('user')!)
-    return instance.put('/category/'+category._id, category,{
+    return axiosPrivate.put('/category/'+category._id, category,{
         headers:{
             Authorization: `Bearer ${accessToken}`
         },
@@ -26,7 +27,7 @@ export const updateCate =(category: Icate)=>{
 }
 export const addProductCate =(category: Icate)=>{
     const {accessToken}= JSON.parse(localStorage.getItem('user')!)
-    return instance.post('/category', category,{
+    return axiosPrivate.post('/category', category,{
         headers:{
             Authorization: `Bearer ${accessToken}`
         },

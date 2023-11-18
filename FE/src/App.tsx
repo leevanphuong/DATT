@@ -5,6 +5,7 @@ import { clientRouter } from './app/modules/client/router'
 import Detail from './app/container/Detail.componet'
 import DefaultAdmin from './app/container/DefaultAdmin.component'
 import { adminRouter } from './app/modules/admin/router'
+import { CheckAuth } from './app/container/Checkadmin'
 
 function App() {
   let element: any = useRoutes([
@@ -19,7 +20,11 @@ function App() {
         },
         {
           path: 'admin',
-          element: <DefaultAdmin />,
+          element: (
+            <CheckAuth>
+              <DefaultAdmin />
+            </CheckAuth>
+          ),
           children: adminRouter
         },
       ]

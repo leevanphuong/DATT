@@ -4,7 +4,6 @@ import {
     OrderedListOutlined,
     ShoppingCartOutlined,
     HomeOutlined,
-    CommentOutlined,
 
 } from '@ant-design/icons'
 import { SiAdminer } from 'react-icons/si';
@@ -16,9 +15,9 @@ export const menuDashBoard = [
         label: 'DashBoard'
     },
     {
-        key: '/admin/user',
+        key: '/admin/auth',
         icon: <UserOutlined />,
-        label: 'User'
+        label: 'Auth'
     },
     {
         key: '/admin/category',

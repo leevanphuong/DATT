@@ -1,17 +1,17 @@
-import instance from "~/app/api/instance/api"
+import { axiosPrivate } from "~/app/api/ConfigApi"
 
 export const getAllProduct = async () => {
-    return await instance.get('/product')
+    return await axiosPrivate.get('/product')
 }
 
 export const deleteProduct = async (Id: any) => {
-    return await instance.delete('/product/' + Id)
+    return await axiosPrivate.delete('/product/' + Id)
 }
 
 export const createProduct = async (dataBody: any) => {
-    return await instance.post("/product/add", dataBody)
+    return await axiosPrivate.post("/product/add", dataBody)
 }
 
 export const changeProduct = async (bodyRequest: any, userId: any) => {
-    return await instance.put('/product/edit/' + userId, bodyRequest)
+    return await axiosPrivate.put('/product/edit/' + userId, bodyRequest)
 }

@@ -24,6 +24,8 @@ const Header:FunctionComponent<HeaderProps> = () => {
       navigate('/')
     }
   }
+  const getUser = localStorage.getItem('checkAuth')
+  
   return (
    <div css={cssHeader}>
      <div className='container mt-2 header'>
@@ -58,6 +60,13 @@ const Header:FunctionComponent<HeaderProps> = () => {
                                   <AiOutlineSetting /> Quản lý{' '}
                                 </p>
                                 </Link>
+                                {getUser === 'ADMIN' && (  
+                                        <Link style={{ textDecoration: "none" }} to={'/admin'}>
+                                            <p className="font-weight-normal text-10 py-2">
+                                                <AiOutlineSetting /> Admin
+                                            </p>
+                                        </Link>
+                                    )}
                                 <p className=' font-weight-normal text-10 py-2' onClick={handleLoginLogout}>
                                   {' '}
                                   <HiOutlineLogout />

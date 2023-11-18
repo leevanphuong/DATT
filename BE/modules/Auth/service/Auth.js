@@ -17,8 +17,8 @@ export const signin = async (req) => {
         expiresIn: "5d",
     });
     user.password = undefined
-    const auth = { user, accessToken: token }
-    return auth
+    const auths = { user, accessToken: token }
+    return auths
 }
 
 export const getAllUsers = async (req) => {
@@ -46,4 +46,8 @@ export const updateUsers = async (req) => {
             password: bcryptPassword
         });
     return update
+}
+export const getUserDetails = async (query) => {
+    const user = await authModel.findById(query.userId)
+    return user
 }

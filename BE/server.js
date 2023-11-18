@@ -10,7 +10,6 @@ app.use(express.json())
 
 connectDB()
 
-// app.use('/api/v1', routes)
 app.use("/api", router)
 
 const PORT = process.env.PORT || 8001

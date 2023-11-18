@@ -1,7 +1,6 @@
 import { Button, Space, Table, Image, Modal, Form, Input, Upload, message, InputNumber, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getAllProduct, createProduct, deleteProduct } from './servce/productService';
-import { UploadOutlined } from '@ant-design/icons';
+import { getAllProduct, createProduct, deleteProduct, changeProduct } from './servce/productService';
 import { getAllCategory } from '../category/service/categoeyservice';
 import { getAllAuthor } from '../author/service/authorservice';
 
@@ -24,7 +23,6 @@ const ProductAdmin = () => {
   useEffect(()=>{
     getAllAuthor().then(({data})=> setAuthor(data))
   },[])
-  console.log(category)
   const handleOk = async () => {
     try {
       const values = await form.validateFields();
@@ -70,6 +68,14 @@ const ProductAdmin = () => {
         images: product.images,
         AuthorID: product.AuthorID,
         categoryId: product.categoryId,
+        price: product.price,
+        sale: product.sale,
+        long: product.long,
+        page: product.page,
+        wide: product.wide,
+        heavy: product.heavy,
+        description: product.description,
+        quantity: product.quantity,
       }));
   
       setData(transformedData);
@@ -77,7 +83,30 @@ const ProductAdmin = () => {
       console.error('Error fetching products or categories:', error);
     }
   };
+  const [editForm] = Form.useForm();
+  const [editingItem, setEditingItem] = useState<any>(null);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const handleEditClick = (record:any) => {
+    setEditingItem(record);
+    setEditModalVisible(true);
+  };
 
+  const handleEditOk = async () => {
+    try {
+      const values = await editForm.validateFields();
+      const productId = editingItem?.key;
+      await changeProduct(values, productId);
+      setEditModalVisible(false);
+      fetchproduct();
+      message.success('Thông tin đã được cập nhật thành công');
+    } catch (error) {
+      console.error('Error updating category:', error);
+    }
+  };
+
+  const handleEditCancel = () => {
+    setEditModalVisible(false);
+  };
   useEffect(() => {
     fetchproduct();
   }, []);
@@ -112,7 +141,7 @@ const ProductAdmin = () => {
       key: 'action',
       render: (_:any, record:any) => (
         <Space size="middle">
-          <Button className='btn btn-warning'>Edit</Button>
+          <Button className='btn btn-warning' onClick={() => handleEditClick(record)}>Edit</Button>
           <Button onClick={()=>{removeProduct(record.key)}} className='btn btn-danger'>Xóa</Button>
         </Space>
       ),
@@ -146,6 +175,129 @@ const ProductAdmin = () => {
         onCancel={handleCancel}
       >
         <Form form={form} layout="vertical" name="addproductForm">
+          <Form.Item
+            name="name"
+            label="product Name"
+            rules={[{ required: true, message: 'Please enter the product name!' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="images"
+            label="product Images"
+            rules={[{ required: true, message: 'Please upload the product images!' }]}
+          >
+              <Input/>
+          </Form.Item>
+          <Form.Item
+            name="price"
+            label="price"
+            rules={[{ required: true, message: 'Please enter the product price!' }]}
+          >
+            <InputNumber/>
+          </Form.Item>
+          <Form.Item
+            name="sale"
+            label="sale"
+            rules={[{ required: true, message: 'Please enter the product sale!' }]}
+          >
+            <InputNumber/>
+          </Form.Item>
+          <Form.Item
+            name="long"
+            label="long"
+            rules={[{ required: true, message: 'Please enter the product long!' }]}
+          >
+            <Input/>
+          </Form.Item>
+          <Form.Item
+            name="page"
+            label="page"
+            rules={[{ required: true, message: 'Please enter the product page!' }]}
+          >
+            <InputNumber/>
+          </Form.Item>
+          <Form.Item
+            name="wide"
+            label="wide"
+            rules={[{ required: true, message: 'Please enter the product wide!' }]}
+          >
+            <Input/>
+          </Form.Item>
+          <Form.Item
+            name="heavy"
+            label="heavy"
+            rules={[{ required: true, message: 'Please enter the product heavy!' }]}
+          >
+            <Input/>
+          </Form.Item>
+          <Form.Item
+            name="description"
+            label="description"
+            rules={[{ required: true, message: 'Please enter the product description!' }]}
+          >
+            <Input/>
+          </Form.Item>
+          <Form.Item
+            name="quantity"
+            label="quantity"
+            rules={[{ required: true, message: 'Please enter the product quantity!' }]}
+          >
+            <InputNumber/>
+          </Form.Item>
+          <Form.Item
+            name="categoryId"
+            label="category"
+            rules={[{ required: true, message: 'Please select the category!' }]}
+            >
+            <Select placeholder="Danh mục">
+                {category.map((option:any) => (
+                <Select.Option key={option._id} value={option._id}>
+                    {option.name}
+                </Select.Option>
+                ))}
+            </Select>
+            </Form.Item>
+            <Form.Item
+            name="AuthorID"
+            label="Author"
+            rules={[{ required: true, message: 'Please select the Author!' }]}
+            >
+            <Select placeholder="Tác giả">
+                {author.map((option:any) => (
+                <Select.Option key={option._id} value={option._id}>
+                    {option.name}
+                </Select.Option>
+                ))}
+            </Select>
+            </Form.Item>
+        </Form>
+      </Modal>
+      <Modal
+        title="Chỉnh sửa"
+        visible={editModalVisible}
+        onOk={handleEditOk}
+        onCancel={handleEditCancel}
+      >
+        <Form 
+        form={editForm} 
+        layout="vertical" 
+        name="addproductForm"
+        initialValues={{
+          name: editingItem?.name,
+          images: editingItem?.images,
+          price: editingItem?.price,
+          sale: editingItem?.sale,
+          long: editingItem?.long,
+          page: editingItem?.page,
+          wide: editingItem?.wide,
+          heavy: editingItem?.heavy,
+          description: editingItem?.description,
+          quantity: editingItem?.quantity,
+          categoryId: editingItem?.categoryId,
+          AuthorID: editingItem?.AuthorID,
+        }}
+        >
           <Form.Item
             name="name"
             label="product Name"

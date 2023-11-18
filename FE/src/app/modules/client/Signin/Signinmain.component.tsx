@@ -18,11 +18,13 @@ const Signinmain: FunctionComponent<SigninmainProps> = () => {
         if (res) {
             localStorage.setItem('accessToken', res.data.accessToken);
             localStorage.setItem('userID', res.data.user._id);
-            message.success("Chào mừng đện với PolyBook", () => {
+            localStorage.setItem("emailUser", res.data.user.email)
+            message.success("Chào mừng đến với PolyBook", () => {
                 navigate("/");
                 location.reload();
             });
         }
+        localStorage.setItem("checkAuth", res.data.user.role)
     },
 
         (err) => {

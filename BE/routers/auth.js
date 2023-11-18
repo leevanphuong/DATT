@@ -9,5 +9,6 @@ router.get('/', authController.getAllUser)
 router.get('/:id', authController.getOneUser)
 router.delete('/:id', authController.deleteUser)
 router.put('/update/:id', authController.updateUser)
+router.get('/user-detail', authController.getUserDetail)
 export default router
 

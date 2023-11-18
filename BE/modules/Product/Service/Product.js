@@ -15,16 +15,14 @@ export const addProduct = async (req) => {
     const products = await Product.create(req.body)
     return products
 }
-export const updateProduct = async (req) => {
+export const updateProduct= async (req) => {
     const id = req.params.id
-    const fileImages = req.files
-    const check = fileImages.flatMap((item) => item.path)
-    const update = await Product.updateOne({
+    const update= await Product.updateOne({
         _id: id
     },
         {
-            ...req.body,
-            images: check,
-        });
+            ...req.body
+        }
+    )
     return update
 }

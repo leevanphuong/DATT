@@ -136,7 +136,7 @@ const Detail:FunctionComponent<DetailProps> = () => {
                             </tr>
                             <tr>
                             <th className="fw-bold">Nhà xuất bản</th>
-                            <td>{productDetail?.publish}</td>
+                            <td>{author?.name}</td>
                             </tr>
                         </thead>
                         </table>

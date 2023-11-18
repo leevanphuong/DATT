@@ -1,17 +1,17 @@
-import instance from "~/app/api/instance/api"
+import { axiosPrivate } from "~/app/api/ConfigApi"
 
 export const getAllAuthor = async () => {
-    return await instance.get('/author')
+    return await axiosPrivate.get('/author')
 }
 
 export const deleteAuthor = async (userId: any) => {
-    return await instance.delete('/author/' + userId)
+    return await axiosPrivate.delete('/author/' + userId)
 }
 
 export const createAuthor = async (dataBody: any) => {
-    return await instance.post("/author/add", dataBody)
+    return await axiosPrivate.post("/author/add", dataBody)
 }
 
 export const changeAuthor = async (bodyRequest: any, userId: any) => {
-    return await instance.put('/author/edit/' + userId, bodyRequest)
+    return await axiosPrivate.put('/author/edit/' + userId, bodyRequest)
 }

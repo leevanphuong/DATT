@@ -3,6 +3,7 @@ import CategoryAdmin from "./category/CategoryAdmin";
 import AuthorAdmin from "./author/AuthorAdmin";
 import Orderadmin from "./order/OrderAdmin";
 import ProductAdmin from "./product/productAdmin";
+import AuthAdmin from "./auth/AuthAdmin";
 
 export const adminRouter: RouteObject[] = [
     {
@@ -20,5 +21,9 @@ export const adminRouter: RouteObject[] = [
     {
         path:"product",
         element:<ProductAdmin/>
+    },
+    {
+        path:"auth",
+        element:<AuthAdmin/>
     }
 ]

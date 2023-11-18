@@ -1,12 +1,15 @@
-import { Button, Space, Table, Image, Modal, Form, Input, Upload, message } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getAllCategory, createCategory, deleteCategory } from './service/categoeyservice';
+import { Button, Space, Table, Image, Modal, Form, Input, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import { getAllCategory, createCategory, deleteCategory, changeCategory } from './service/categoeyservice';
 
 const CategoryAdmin = () => {
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [editModalVisible, setEditModalVisible] = useState(false);
   const [form] = Form.useForm();
+  const [editForm] = Form.useForm();
+  const [editingItem, setEditingItem] = useState<any>(null);
 
   const showModal = () => {
     setModalVisible(true);
@@ -15,12 +18,12 @@ const CategoryAdmin = () => {
   const handleOk = async () => {
     try {
       const values = await form.validateFields();
-      console.log(values)
       const response = await createCategory(values);
       const newCategory = response.data;
 
       message.success('Danh mục đã được thêm thành công');
       setModalVisible(false);
+      fetchCategories();
     } catch (error) {
       console.error('Error adding category:', error);
       message.error('Đã có lỗi xảy ra khi thêm danh mục');
@@ -51,16 +54,43 @@ const CategoryAdmin = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
-  const removeCategory=(id:any)=>{
-    const remove = confirm("Bạn có muốn xóa")
-    if(remove){
-      deleteCategory(id)
-        message.success("Xóa thành công")
+
+  const removeCategory = async (id:any) => {
+    const remove = window.confirm('Bạn có muốn xóa');
+    if (remove) {
+      try {
+        await deleteCategory(id);
+        message.success('Xóa thành công');
+        fetchCategories();
+      } catch (error) {
+        console.error('Error deleting category:', error);
+        message.error('Xóa thất bại');
+      }
     }
-    else{
-        message.error("Xóa thất bại")
+  };
+
+  const handleEditClick = (record:any) => {
+    setEditingItem(record);
+    setEditModalVisible(true);
+  };
+
+  const handleEditOk = async () => {
+    try {
+      const values = await editForm.validateFields();
+      const categoryId = editingItem?.key;
+      await changeCategory(values, categoryId);
+      setEditModalVisible(false);
+      fetchCategories();
+      message.success('Thông tin đã được cập nhật thành công');
+    } catch (error) {
+      console.error('Error updating category:', error);
     }
-  }
+  };
+
+  const handleEditCancel = () => {
+    setEditModalVisible(false);
+  };
+
   const columns = [
     {
       title: 'Name',
@@ -79,8 +109,8 @@ const CategoryAdmin = () => {
       key: 'action',
       render: (_:any, record:any) => (
         <Space size="middle">
-          <Button className='btn btn-warning'>Edit</Button>
-          <Button onClick={()=>{removeCategory(record.key)}} className='btn btn-danger'>Xóa</Button>
+          <Button className='btn btn-warning' onClick={() => handleEditClick(record)}>Edit</Button>
+          <Button onClick={() => removeCategory(record.key)} className='btn btn-danger'>Xóa</Button>
         </Space>
       ),
     },
@@ -116,12 +146,34 @@ const CategoryAdmin = () => {
             label="Category Images"
             rules={[{ required: true, message: 'Please upload the category images!' }]}
           >
-            <Upload
-              name="file"
-              beforeUpload={() => false}
-            >
-              <Button icon={<UploadOutlined />}>Select File</Button>
-            </Upload>
+          <Input />
+          </Form.Item>
+        </Form>
+      </Modal>
+      <Modal
+        title="Chỉnh sửa"
+        visible={editModalVisible}
+        onOk={handleEditOk}
+        onCancel={handleEditCancel}
+      >
+        <Form form={editForm} 
+        layout="vertical" 
+        name="editCategoryForm"
+        initialValues={{ name: editingItem?.name, images: editingItem?.images }}
+        >
+          <Form.Item
+            name="name"
+            label="Category Name"
+            rules={[{ required: true, message: 'Please enter the category name!' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="images"
+            label="Category Images"
+            rules={[{ required: true, message: 'Please upload the category images!' }]}
+          >
+          <Input />
           </Form.Item>
         </Form>
       </Modal>
