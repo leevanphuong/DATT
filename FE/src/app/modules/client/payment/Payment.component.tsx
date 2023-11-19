@@ -160,7 +160,7 @@ const Payment = (props: Props) => {
     <div className='container mt-4'>
         <div className='row'>
           <h3 className='pb-4'>Thông tin đặt hàng</h3>
-            <div className='col-8'>
+            <div className='col-12 col-md-8'>
             <Form
               form={form}
               name="basic"
@@ -262,15 +262,14 @@ const Payment = (props: Props) => {
               >
                 <Input />
               </Form.Item>
-
-              <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" className='btn btn-dark w-100' htmlType="submit">
-                Mua hàng
+              <Form.Item wrapperCol={{ span: 6, offset: 0 }} className='text-center'>
+                <Button type="primary" className='btn mx-auto btn-dark w-100' htmlType="submit">
+                  Mua hàng
                 </Button>
               </Form.Item>
             </Form>
             </div>
-            <div className='col-4'>
+            <div className='col-12 col-md-4'>
                 <div className='container'>
                   <div className=''>
                     <h5>Tổng thanh toán: {totalAmount.toLocaleString()} VND</h5>

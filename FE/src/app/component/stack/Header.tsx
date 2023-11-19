@@ -30,19 +30,19 @@ const Header:FunctionComponent<HeaderProps> = () => {
    <div css={cssHeader}>
      <div className='container mt-2 header'>
       <div className='row'>
-        <div className='col-4'>
+        <div className='col-7 col-md-4'>
           <Link style={{textDecoration:"none"}}  to={"/"}><h1 className='logo'>POLYBOOK</h1></Link>
         </div>
-        <div className="col-5 position-relative d-flex align-items-center justify-content-center">
+        <div className="col-md-5 d-none d-md-flex position-relative d-flex align-items-center justify-content-center">
           <div className="input-group">
-            <InputComponent classes="form-control border-primary rounded-4" placeholder="Tìm kiếm..." />
+            <InputComponent classes="form-control border-primary rounded-4 " placeholder="Tìm kiếm..." />
             <ButtonComponent classes="btn border border-0 position-absolute top-50 end-0 translate-middle-y ms-n1">
               <i><BsSearch/></i>
             </ButtonComponent>
           </div>
         </div>
         {isLoggedIn ? (
-            <div className="col-3 d-flex align-items-center justify-content-center">
+            <div className="col-5 col-md-3 d-flex align-items-center justify-content-center">
               <div className="mr-5 item-menu">
                 <div className='title'>
                       <div>
@@ -79,7 +79,7 @@ const Header:FunctionComponent<HeaderProps> = () => {
                       </div>
                 </div>
               </div>
-              <div className="ml-5">
+              <div className="ml-5 titles item-menu">
                 <Link to={'/cart'}>
                   <ButtonComponent classes="btn border border-0">
                     <i className='shopping'><GiShoppingBag/></i>
@@ -88,7 +88,7 @@ const Header:FunctionComponent<HeaderProps> = () => {
               </div>
             </div>
         ) : (
-            <div className="col-3 d-flex align-items-center justify-content-center">
+            <div className="col-5 col-md-3 d-flex align-items-center justify-content-center">
               <div className="mr-5">
                 <Link to={'/signin'}>
                   <ButtonComponent classes="btn me-2 btn-dark border border-0">
@@ -122,16 +122,24 @@ const cssHeader = css`
   .title {
     cursor: pointer;
     position: relative;
+    top: 0px;
+  }
+  @media (max-width: 767px){
+    .title {
+      top: 10px;
+    }
+  }
+  .titles{
+    top: 30px;
   }
   .links {
     font-size: 16px;
     list-style: none;
     background-color: white;
     position: absolute;
-    top: 30px;
     display: flex;
     flex-direction: column;
-    padding: 5px;
+    padding: 2px;
     z-index: 1;
     visibility: hidden;
   }

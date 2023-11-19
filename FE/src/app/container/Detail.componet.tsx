@@ -87,10 +87,10 @@ const Detail:FunctionComponent<DetailProps> = () => {
           <Header/>
         </div>
         <div className='row maindetail mx-auto'>
-        <div className="col-2 shadow p-3 border h-75 rounded-2 me-3">
+        <div className="col-12 col-md-2 shadow p-3 border h-75 rounded-2 me-3">
             <img className="img" src={productDetail?.images} alt="" />
         </div>
-        <div className="col-7 me-4">
+        <div className="col-12 col-md-12 col-lg-7 my-2 me-4">
             <p className="fw-normal">{author?.name}</p>
             <h4>{productDetail?.name}</h4>
             <p className='price text-danger fw-bold fs-5'>{productDetail?.sale ? (
@@ -115,7 +115,7 @@ const Detail:FunctionComponent<DetailProps> = () => {
                     )}
                 </div>
             <div className='row mb-4'>
-                <div className='col-6'>
+                <div className='col-12 col-md-6'>
                     <ButtonComponent classes='btn bg-danger text-white' onClick={()=>handleClicktoCart(productDetail?._id)} >Thêm vào giỏ hàng</ButtonComponent>  
                     <ButtonComponent classes='btn bg-warning text-white mx-3' onClick={handleSave}>
                     {isSaved ? 'Đã lưu' : 'Lưu'}
@@ -164,7 +164,7 @@ const Detail:FunctionComponent<DetailProps> = () => {
                 </p>
             </div>
         </div>
-        <div className="col-2">
+        <div className="col-12 col-md-2">
             <ButtonComponent classes='btn style shadow btn-light'>Vui Lòng Chọn Định Dạng</ButtonComponent>
         </div>
         </div>
@@ -174,7 +174,7 @@ const Detail:FunctionComponent<DetailProps> = () => {
            <h3 className='py-4'>Có liên quan</h3>
                 <div className='row'> 
                 {displayedProducts.map((item:any, index:any) => (
-                <div key={item._id} className="col-2">
+                <div key={item._id} className="col-6 col-md-4 col-lg-2 mt-3">
                  <div className="card">
                 {item.sale && <p className="sale">{item.sale}%</p>}
                 <Link to={`/detail/${item._id}`}><img src={item.images} alt="..." className="card-img-top img" /></Link>
@@ -212,7 +212,7 @@ const Detail:FunctionComponent<DetailProps> = () => {
            <h3 className='py-4'>Sản phẩm khác</h3>
                 <div className='row'> 
                 {shuffledProducts.map((item:any, index:any) => (
-                <div key={item._id} className="col-2">
+               <div key={item._id} className="col-6 col-md-4 col-lg-2 mt-3">
                  <div className="card">
                 {item.sale && <p className="sale">{item.sale}%</p>}
                 <Link to={`/detail/${item._id}`}><img src={item.images} alt="..." className="card-img-top img" /></Link>

@@ -8,13 +8,13 @@ const BlogComponent = (props: Props) => {
     <div className='container'>
         <div className='row' css={blogcss}>
             <h4 className='pb-2'>Blog Poly</h4>
-            <div className='col-6'>
+            <div className='col-12 col-md-6'>
                 <img className='img' src="https://www.gramedia.com/blog/content/images/2023/10/Screenshot-2023-10-19-171013.png" alt="" />
                 <p className='fw-light'>Liên kết địa chỉ</p>
                 <a href="" className='text-dark text-decoration-none fw-bold fs-5'>Lợi ích của Tiếp thị liên kết, Kiếm tiền dễ dàng!</a>
                 <p className='pt-5'>Ngày 19 tháng 10 năm 2023</p>
             </div>
-            <div className='col-6'>
+            <div className='col-12 col-md-6'>
                 <div className='row mb-4'>
                     <div className='col-3'>
                         <img className='w-100' src="https://www.gramedia.com/blog/content/images/2023/10/SMAK-Cor-Jesu---1.jpeg" alt="" />

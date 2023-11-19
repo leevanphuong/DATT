@@ -39,7 +39,7 @@ const Signupmain: FunctionComponent<SignupmainProps> = () => {
   return (
     <div className="container" css={cssSignin}>
       <div className="row">
-        <div className="col-8 mt-5">
+        <div className="col-12 col-md-8 mt-5">
           <Form
             name="basic"
             labelCol={{ span: 8 }}
@@ -117,13 +117,13 @@ const Signupmain: FunctionComponent<SignupmainProps> = () => {
             </Form.Item>
           </Form>
         </div>
-        <div className='col-4'>
+        <div className='col-12 col-md-4'>
         <div className='text-center'>
               <h3 className='p-4 logo'>POLYBOOK</h3>
               <p> Đăng ký ngay để nhận được nhiều ưu đãi!</p>
           </div>
         <div className='text-center mt-2'>
-          <p className='text-decoration-none'>Bạn đã có tài khoản?<a className='pl-2' href="">Đăng nhập</a></p>
+          <p className='text-decoration-none'>Bạn đã có tài khoản?<a className='pl-2' href="/signin">Đăng nhập</a></p>
         </div>
         </div>
       </div>

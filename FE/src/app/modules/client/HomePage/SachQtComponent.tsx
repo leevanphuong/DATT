@@ -24,21 +24,21 @@ const SachQtComponent = (props: Props) => {
 return (
   <div className='container'>
        <div className="row">
-            <div className="col-11 my-4">
+            <div className="col-10 my-4 col-md-11">
               <h3>{categoryRedux?.name}</h3>
             </div>
-            <div className="col-1 my-4">
+            <div className="col-2 my-4 col-md-1">
             <Link to={`/category/${id}`}><a href="" className="text-decoration-none fw-bold">Xem thêm</a></Link>
             </div>
           </div>
       <div className='row'>
-      <div className='col-3 d-flex align-items-center'>
+      <div className='col-3 d-none d-md-none d-lg-flex align-items-center'>
           <img src="https://cdn.gramedia.com/uploads/category-list/Banner_Category_Gcom_-_April_2023_2_Novel_Terbaru_6xPgO1D__w204_hauto.png" alt="" />
       </div>
-      <div className='col-9'>
+      <div className='col-12 col-md-9'>
           <div className='row' css={SachQtcss}>
           {displayedProducts.map((item:any, index:any) => (
-              <div key={item._id} className="col-2">
+                <div key={item._id} className="col-6 col-md-4 col-lg-2">
                <div className="card">
               {item.sale && <p className="sale">{item.sale}%</p>}
               <Link to={`/detail/${item._id}`}><img src={item.images} alt="..." className="card-img-top img" /></Link>
@@ -96,5 +96,16 @@ const SachQtcss = css`
     padding: 20px 10px;
     height: auto;
     border-radius: 10px;
+  }
+  @media (min-width: 768px) {
+    .imgs {
+      display: block; 
+    }
+  }
+
+  @media (max-width: 767px) {
+    .imgs {
+      display: none;
+    }
   }
 `

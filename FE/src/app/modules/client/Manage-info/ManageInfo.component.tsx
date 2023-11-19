@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 import { Button, Checkbox, Form, Input, message } from 'antd';
 import { Link } from 'react-router-dom';
 import { getOneAuth, updateAuth } from '~/app/api/auth/ApiAuth';
+import { BsListTask } from 'react-icons/bs';
 interface ManageInfoProps {}
 type FieldType = {
     name?: string;
@@ -40,47 +41,69 @@ const ManageInfo:FunctionComponent<ManageInfoProps> = () => {
       const handleItemClick = (index:any) => {
         setSelectedItem(index);
       };
+      console.log(form)
+      const [isCollapsed, setIsCollapsed] = useState(true);
+
+      const handleToggle = () => {
+        setIsCollapsed(!isCollapsed);
+      }
   return (
     <div className='container mt-5'>
          <div className='row'>
-            <div className="col-3">
+         <div className="col-12 col-md-3 mt-4 d-md-none d-lg-none">
+            <button
+                className="btn btn-primary"
+                type="button"
+                data-toggle="collapse"
+                data-target="#sidebarCollapse"
+                aria-expanded="false"
+                aria-controls="sidebarCollapse"
+                onClick={handleToggle}
+            >
+                <BsListTask />
+            </button>
+            <div className={`collapse ${isCollapsed ? '' : 'show'}`} id="sidebarCollapse">
                 <ul className="list-group list-group-flush">
-                    <Link style={{textDecoration:"none"}}  to={"/manage-info"}>
-                    <li 
-                    className={`list-group-item ${selectedItem === 0 ? 'active' : ''}`}
-                    style={{
-                        backgroundColor: selectedItem === 0 ? '#CED4DA' : '#fff',
-                    }}
-                    onClick={() => handleItemClick(0)}
-                    >
+                <Link style={{ textDecoration: "none" }} to={"/manage-info"}>
+                    <li className='list-group-item'>
                     Thông tin tài khoản
                     </li>
-                    </Link>
-                    <Link style={{textDecoration:"none"}}  to={"/manage"}>
-                    <li
-                    className={`list-group-item ${selectedItem === 1 ? 'active' : ''}`}
-                    style={{
-                        backgroundColor: selectedItem === 1 ? '#CED4DA' : '#fff',
-                    }}
-                    onClick={() => handleItemClick(1)}
-                    >
+                </Link>
+                <Link style={{ textDecoration: "none" }} to={"/manage"}>
+                    <li className='list-group-item'>
                     Quản lý đơn hàng
                     </li>
-                    </Link>
-                    <Link style={{textDecoration:"none"}} to={"/manage-product"}>
-                    <li 
-                    className={`list-group-item ${selectedItem === 0 ? 'active' : ''}`}
-                    style={{
-                        backgroundColor: selectedItem === 0 ? '#CED4DA' : '#fff',
-                    }}
-                    onClick={() => handleItemClick(0)}
-                    >
+                </Link>
+                <Link style={{ textDecoration: "none" }} to={"/manage-product"}>
+                    <li className='list-group-item'>
                     Sản phẩm đã lưu
                     </li>
-                    </Link>
+                </Link>
                 </ul>
             </div>
-            <div className='col-9'>
+        </div>
+        <div className="col-12 col-md-3 mt-4 d-none d-md-flex d-lg-flex">
+            <div id="sidebarCollapse">
+                <ul className="list-group list-group-flush">
+                <Link style={{ textDecoration: "none" }} to={"/manage-info"}>
+                    <li className='list-group-item'>
+                    Thông tin tài khoản
+                    </li>
+                </Link>
+                <Link style={{ textDecoration: "none" }} to={"/manage"}>
+                    <li className='list-group-item'>
+                    Quản lý đơn hàng
+                    </li>
+                </Link>
+                <Link style={{ textDecoration: "none" }} to={"/manage-product"}>
+                    <li className='list-group-item'>
+                    Sản phẩm đã lưu
+                    </li>
+                </Link>
+                </ul>
+            </div>
+        </div>
+            <div className='col-12 col-md-9 mt-4'>
                 <h3>Thông tin cá nhân</h3>
                     <div>
                     <Form

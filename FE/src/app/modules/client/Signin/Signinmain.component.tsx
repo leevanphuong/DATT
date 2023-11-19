@@ -39,7 +39,7 @@ const Signinmain: FunctionComponent<SigninmainProps> = () => {
   return (
     <div className="container" css={cssSignin}>
       <div className="row">
-        <div className="col-6 mt-5">
+        <div className="col-12 col-md-6 mt-5">
           <Form
             name="basic"
             labelCol={{ span: 8 }}
@@ -70,7 +70,7 @@ const Signinmain: FunctionComponent<SigninmainProps> = () => {
                 iconRender={(visible) => (visible ? <AiFillEye /> : <AiFillEyeInvisible />)}
               />
             </Form.Item>
-            <Form.Item wrapperCol={{ offset: 5, span: 16 }}>
+            <Form.Item wrapperCol={{ offset: 1, span: 5 }}>
               <div className='text-center'>
                   <Button type="primary" htmlType="submit">
                     Đăng Nhập
@@ -82,10 +82,10 @@ const Signinmain: FunctionComponent<SigninmainProps> = () => {
           <a href="" className='text-decoration-none'>Quên Mật Khẩu?</a>
         </div>
         <div className='text-center mt-2'>
-          <p className='text-decoration-none'>Chưa đăng ký? <a href="">Đăng ký</a></p>
+          <p className='text-decoration-none'>Chưa đăng ký? <a href="/signup">Đăng ký</a></p>
         </div>
         </div>
-        <div className='col-6'>
+        <div className='col-12 col-md-6'>
           <div className='text-center'>
               <h3 className='p-4 logo'>POLYBOOK</h3>
               <p> Đăng nhập ngay để nhận được nhiều ưu đãi!</p>

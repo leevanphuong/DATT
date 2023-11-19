@@ -23,7 +23,7 @@ const HomePageMain = (props: Props) => {
         <div className='row'>
         <div className='container'>
         <div className='row my-5'>
-            <div className='col-6'>
+            <div className='col-12 col-md-12 col-lg-6'>
             <Carousel
             autoPlay={true}
             showThumbs={false}
@@ -38,7 +38,7 @@ const HomePageMain = (props: Props) => {
             ))}
             </Carousel>
             </div>
-            <div className='col-6'>
+            <div className='col-12 col-md-12 col-lg-6'>
               <div className="d-flex flex-column">
                 <div className="flex-fill p-2 w-100">
                   <img className='w-100' src="https://cdn.gramedia.com/uploads/marketing/Promo_Teman_Membaca_Oktober_2023_Storefront_mElnCGX__wauto_h164.jpg" alt="" />

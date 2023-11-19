@@ -96,13 +96,14 @@ const CartMain: FunctionComponent<CartMainProps> = () => {
       <div className="container mt-4" css={Cartcss}>
       <h2>Giỏ Hàng</h2>
       <div className="row">
-        <div className="col-8">
+        <div className="col-12 col-md-8">
           {filteredProducts.length === 0 && (
             <p className='text-center fs-3'>Không có sản phẩm trong giỏ hàng.</p>
           )}
 
           {filteredProducts.length > 0 && (
-            <table className="table text-center">
+         <div className='table-responsive'>
+             <table className="table text-center">
               <thead>
                 <tr>
                   <th scope="col" className="col-1"></th>
@@ -165,9 +166,10 @@ const CartMain: FunctionComponent<CartMainProps> = () => {
                 ))}
               </tbody>
             </table>
+         </div>
           )}
         </div>
-        <div className="col-4 text-center">
+        <div className="col-12 col-md-4 text-center">
         <div className="bg-light w-75 mx-auto p-3 mb-3">
                 <h4>Tổng tiền:</h4>
                 <p>{total.toLocaleString()} VND</p>

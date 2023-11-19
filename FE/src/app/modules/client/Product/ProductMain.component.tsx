@@ -3,6 +3,7 @@ import {css} from '@emotion/react'
 import Pagination from '~/app/component/stack/Pagination'
 import { getAllProduct } from '~/app/api/product/Apiproduct'
 import { Iproduct } from '~/app/interface/Product'
+import { Link } from 'react-router-dom'
 interface ProductMainProps  {}
 
 const ProductMain: FunctionComponent<ProductMainProps> = () => {
@@ -49,10 +50,10 @@ const ProductMain: FunctionComponent<ProductMainProps> = () => {
         <div className="col-9 container mt-4">
           <div className="row justify-content-center">
             {currentItems.map((product: any) => (
-              <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-2 swiper-slide mt-3">
+              <div key={product._id} className="col-6 col-md-4 col-lg-2 swiper-slide mt-3">
                 <div className="card">
                   {product.sale && <p className="sale">{product.sale}%</p>}
-                  <img src={product.images} alt="..." className="card-img-top img" />
+                  <Link to={`/detail/${product._id}`}><img src={product.images} alt="..." className="card-img-top img" /></Link>
                   <div className="card-body">
                     <h5 className="card-title">{product.name}</h5>
                     <p className="card-text text-danger">

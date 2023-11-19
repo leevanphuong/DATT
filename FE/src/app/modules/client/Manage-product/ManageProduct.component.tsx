@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useProductRedux } from '../redux/hook/useProductReducer';
 import {css} from '@emotion/react'
 import { message } from 'antd';
+import { BsListTask } from 'react-icons/bs';
 
 interface ManageProductProps {}
 
@@ -45,10 +46,27 @@ const ManageProduct:FunctionComponent<ManageProductProps> = () => {
           message.success("Bỏ lưu sản phẩm")
         }
       };
+      const [isCollapsed, setIsCollapsed] = useState(true);
+
+  const handleToggle = () => {
+    setIsCollapsed(!isCollapsed);
+  }
   return (
     <div className='container mt-5' css={cssManageproduct}>
         <div className='row'>
-            <div className="col-3">
+        <div className="col-12 col-md-3 mt-4 d-md-none d-lg-none">
+            <button
+                className="btn btn-primary"
+                type="button"
+                data-toggle="collapse"
+                data-target="#sidebarCollapse"
+                aria-expanded="false"
+                aria-controls="sidebarCollapse"
+                onClick={handleToggle}
+            >
+                <BsListTask />
+            </button>
+            <div className={`collapse ${isCollapsed ? '' : 'show'}`} id="sidebarCollapse">
                 <ul className="list-group list-group-flush">
                 <Link style={{ textDecoration: "none" }} to={"/manage-info"}>
                     <li className='list-group-item'>
@@ -67,7 +85,29 @@ const ManageProduct:FunctionComponent<ManageProductProps> = () => {
                 </Link>
                 </ul>
             </div>
-            <div className='col-9'>
+        </div>
+        <div className="col-12 col-md-3 mt-4 d-none d-md-flex d-lg-flex">
+            <div id="sidebarCollapse">
+                <ul className="list-group list-group-flush">
+                <Link style={{ textDecoration: "none" }} to={"/manage-info"}>
+                    <li className='list-group-item'>
+                    Thông tin tài khoản
+                    </li>
+                </Link>
+                <Link style={{ textDecoration: "none" }} to={"/manage"}>
+                    <li className='list-group-item'>
+                    Quản lý đơn hàng
+                    </li>
+                </Link>
+                <Link style={{ textDecoration: "none" }} to={"/manage-product"}>
+                    <li className='list-group-item'>
+                    Sản phẩm đã lưu
+                    </li>
+                </Link>
+                </ul>
+            </div>
+        </div>
+            <div className='col-12 col-md-9 mt-4'>
                 <h3>Sản phẩm đã lưu</h3>
                 { newProductArray.length>= 1 ?(
                        <table className="table text-center">

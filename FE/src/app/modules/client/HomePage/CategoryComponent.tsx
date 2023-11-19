@@ -19,7 +19,7 @@ const CategoryComponent: FunctionComponent<CategoryComponentProps> = () => {
     <div className='container'>
       <div className='row' css={cssCate}>
       {cates.map((cate) => (
-            <div className='col-2' key={cate._id}>
+            <div className='col-6 col-md-2' key={cate._id}>
                 {cate.images && cate.images[0] && (
                 <div>
                     <Link to={`/category/${cate._id}`}><img className='img mx-auto d-block' src={cate.images[0]} alt={cate.name} /></Link>

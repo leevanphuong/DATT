@@ -11,15 +11,15 @@ const Footer:FunctionComponent<FooterProps> = () => {
         <div className='email'>
            <div className='container'>
            <div className="row py-3">
-            <div className='col-6'>
+            <div className='col-12 col-md-6'>
                 <h5>
                 Sự ngạc nhiên đặc biệt của chúng tôi dành riêng cho bạn
                 </h5>
             </div>
-            <div className="col-4">
+            <div className="col-6 col-md-4">
                 <InputComponent placeholder="nhập email của bạn ..." classes="form-control" />
             </div>
-            <div className="col-2">
+            <div className="col-6 col-md-2">
                 <ButtonComponent classes='btn rounded-4 border-dark-subtle bg-info text-white'>Nhập</ButtonComponent>
             </div>
             </div>

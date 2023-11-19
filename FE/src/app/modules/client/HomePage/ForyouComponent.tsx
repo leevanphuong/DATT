@@ -24,7 +24,7 @@ useEffect(() => {
             </div>
           </div>  
           {product.map((product: any) => (
-            <div key={product._id} className="swiper-slide col-2">
+            <div key={product._id} className="swiper-slide col-6 my-3 col-md-4 col-lg-2 ">
               <div className="card">
                 {product.sale && <p className="sale">{product.sale}%</p>}
                 <Link to={`/detail/${product._id}`}><img src={product.images} alt="..." className="card-img-top img" /></Link>
